@@ -1,0 +1,38 @@
+#!/bin/bash
+
+echo "load install_dir/auth/kubeconfig"
+echo "IE: export KUBECONFIG=~/install_dir/auth/kubeconfig"
+echo "Check the cluster health"
+echo "Exit sub-shell to continue..."
+(bash)
+
+#CSR accept from compute nodes
+wget -O jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
+chmod +x jq
+sudo mv jq /usr/local/bin/
+oc get csr -ojson | jq -r '.items[] | select(.status == {} ) | .metadata.name' | xargs oc adm certificate approve
+
+#NFS
+sudo dnf install -y nfs-utils
+sudo systemctl enable nfs-server rpcbind
+sudo systemctl start nfs-server rpcbind
+sudo mkdir -p /var/nfsshare/registry
+sudo chmod -R 777 /var/nfsshare
+sudo chown -R nobody:nobody /var/nfsshare
+
+echo '/var/nfsshare 192.168.0.0/24(rw,sync,no_root_squash,no_all_squash,no_wdelay)' | sudo tee /etc/exports
+
+sudo setsebool -P nfs_export_all_rw 1
+sudo systemctl restart nfs-server
+sudo firewall-cmd --permanent --zone=public --add-service mountd
+sudo firewall-cmd --permanent --zone=public --add-service rpc-bind
+sudo firewall-cmd --permanent --zone=public --add-service nfs
+sudo firewall-cmd --reload
+
+oc create -f okd4_files/registry_pv.yaml
+
+cd
+cd okd4_files
+htpasswd -c -B -b users.htpasswd admin password
+oc create secret generic htpass-secret --from-file=htpasswd=users.htpasswd -n openshift-config
+oc apply -f htpasswd_provider.yaml

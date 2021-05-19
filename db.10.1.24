@@ -8,13 +8,14 @@ $TTL    604800
 )
 
 ; name servers - NS records
-    IN      NS      okd4-services.okd.local.
+@    IN      NS      okd4-services.okd.local.
 
 ; name servers - PTR records
-240    IN    PTR    okd4-services.okd.local.
+200    IN    PTR    okd4-services.okd.local.
 
 ; OpenShift Container Platform Cluster - PTR records
-242    IN    PTR    okd4-bootstrap.lab.okd.local.
-241    IN    PTR    okd4-control-plane-1.lab.okd.local.
-240    IN    PTR    api.lab.okd.local.
-240    IN    PTR    api-int.lab.okd.local.
+209    IN    PTR    okd4-bootstrap.lab.okd.local.
+201    IN    PTR    okd4-control-plane-1.lab.okd.local.
+202    IN    PTR    okd4-compute-1.lab.okd.local.
+200    IN    PTR    api.lab.okd.local.
+200    IN    PTR    api-int.lab.okd.local.

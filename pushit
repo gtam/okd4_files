@@ -1,0 +1,64 @@
+#!/bin/bash
+echo "Install bind haproxy httpd..."
+
+#Bind
+sudo dnf -y install bind bind-utils
+sudo firewall-cmd --permanent --add-port=53/udp
+
+#haproxy
+sudo dnf install haproxy -y
+sudo firewall-cmd --permanent --add-port=6443/tcp
+sudo firewall-cmd --permanent --add-port=22623/tcp
+sudo firewall-cmd --permanent --add-service=http
+sudo firewall-cmd --permanent --add-service=https
+
+#HttpD
+sudo dnf install -y httpd
+sudo sed -i 's/Listen 80/Listen 8080/' /etc/httpd/conf/httpd.conf
+sudo setsebool -P httpd_read_user_content 1
+sudo systemctl enable httpd
+sudo systemctl start httpd
+sudo firewall-cmd --permanent --add-port=8080/tcp
+sudo firewall-cmd --reload
+
+echo "Download FCOS image --> https://getfedora.org/coreos/download/"
+echo "Rename fcos image to fcos.raw.xz and fcos.raw.xz.sig"
+echo "Download oc/kubectl/openshift-install utils --> https://github.com/openshift/okd/releases"
+echo "Untar utils"
+echo ""
+echo "Update networking,  ssh key, download fcos image, signature, oc kubectl and openshift-installer utilities"
+echo "sed -i '/192.168.0/10.1.24/g' * to update IP addresses"
+echo "echo ~/.ssh/id_rsa.pub >> ~/okd4_files/install-config.yaml"
+echo "exit sub-shell to continue..."
+(bash)
+
+sudo cp okd4_files/named.conf /etc/named.conf
+sudo cp okd4_files/db* /var/named/
+sudo systemctl enable named
+sudo systemctl start named
+CONN=`nmcli co sh|grep eth|awk '{print $2}'`
+sudo nmcli connection modify $CONN ipv4.dns "127.0.0.1"
+sudo nmcli con mod $CONN ipv4.dns-search okd.local
+sudo nmcli con down $CONN
+sudo nmcli con up $CONN
+
+sudo cp okd4_files/haproxy.cfg /etc/haproxy/haproxy.cfg
+sudo setsebool -P haproxy_connect_any 1
+sudo systemctl enable haproxy
+sudo systemctl start haproxy
+
+cd
+sudo mv kubectl oc openshift-install /usr/local/bin/
+rm -rf install_dir
+mkdir install_dir
+cp okd4_files/install-config.yaml ./install_dir
+cp ./install_dir/install-config.yaml ./install_dir/install-config.yaml.bak
+openshift-install create manifests --dir=install_dir/
+openshift-install create ignition-configs --dir=install_dir/
+sudo mkdir -p /var/www/html/okd4
+sudo rm -rf /var/www/html/okd4/auth /var/www/html/okd4/bootstrap.ign install-config.yaml.bak master.ign metadata.json worker.ign
+sudo cp -R install_dir/* /var/www/html/okd4/
+sudo cp fcos.raw.xz* /var/www/html/okd4/
+sudo chown -R apache: /var/www/html/
+sudo chmod -R 755 /var/www/html/
+curl localhost:8080/okd4/metadata.json
