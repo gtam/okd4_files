@@ -36,3 +36,12 @@ cd okd4_files
 htpasswd -c -B -b users.htpasswd admin password
 oc create secret generic htpass-secret --from-file=htpasswd=users.htpasswd -n openshift-config
 oc apply -f htpasswd_provider.yaml
+
+echo "Update registry with PV:"
+echo "oc edit configs.imageregistry.operator.openshift.io"
+echo ""
+echo "managementState: Managed"
+echo "storage:"
+echo "    pvc:"
+echo "      claim:"
+      
