@@ -1,10 +1,10 @@
 #!/bin/bash
 
-echo "load install_dir/auth/kubeconfig"
-echo "IE: export KUBECONFIG=~/install_dir/auth/kubeconfig"
-echo "Check the cluster health"
-echo "Exit sub-shell to continue..."
-(bash)
+cd
+mkdir .kube
+cd .kube
+curl -o config http://localhost:8080/okd4/auth/kubeconfig
+cd
 
 #CSR accept from compute nodes
 wget -O jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
