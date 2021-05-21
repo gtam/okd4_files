@@ -69,7 +69,7 @@ wget https://github.com/openshift/okd/releases/download/4.5.0-0.okd-2020-07-29-0
 tar -zxvf openshift-client-linux-4.5.0-0.okd-2020-07-29-070316.tar.gz
 tar -zxvf openshift-install-linux-4.5.0-0.okd-2020-07-29-070316.tar.gz
 echo "Downloading libvirt library."
-sudo dnf install -y libvirt
+#sudo dnf install -y libvirt
 echo ""
 echo "[Optional] Download newer version of oc/kubectl/openshift-install utils here --> https://github.com/openshift/okd/releases"
 echo "Untar utils into home folder."
