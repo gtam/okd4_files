@@ -86,7 +86,7 @@ sudo cp okd4_files/named.conf /etc/named.conf
 sudo cp okd4_files/db* /var/named/
 CONN=`nmcli co sh|grep eth|awk '{print $2}'`
 sudo nmcli connection modify $CONN ipv4.dns "127.0.0.1"
-sudo nmcli con mod $CONN ipv4.dns-search okd.local
+#sudo nmcli con mod $CONN ipv4.dns-search okd.local
 sudo nmcli con down $CONN
 sudo nmcli con up $CONN
 sudo systemctl restart named
