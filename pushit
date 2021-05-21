@@ -28,7 +28,7 @@ install_haproxy() {
 install_httpd() {
   #HttpD
   sudo dnf install -y httpd
-  sudo sed -i 's/Listen 80/Listen 8080/' /etc/httpd/conf/httpd.conf
+  sudo sed -i 's/Listen 80$/Listen 8080/' /etc/httpd/conf/httpd.conf
   sudo setsebool -P httpd_read_user_content 1
   sudo systemctl enable httpd
   sudo systemctl start httpd
