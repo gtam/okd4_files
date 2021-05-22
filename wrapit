@@ -1,4 +1,6 @@
 #!/bin/bash
+sudo sed -i '/ okd4-bootstrap /s/^/#/' /etc/haproxy/haproxy.cfg
+sudo systemctl reload haproxy
 
 cd
 mkdir .kube
