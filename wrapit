@@ -38,6 +38,7 @@ cd okd4_files
 htpasswd -c -B -b users.htpasswd admin password
 oc create secret generic htpass-secret --from-file=htpasswd=users.htpasswd -n openshift-config
 oc apply -f htpasswd_provider.yaml
+oc adm policy add-cluster-role-to-user cluster-admin admin
 
 echo "Update registry with PV:"
 echo "oc edit configs.imageregistry.operator.openshift.io"
