@@ -3,7 +3,7 @@
 See https://medium.com/swlh/guide-okd-4-5-single-node-cluster-832693cb752b for full guide.  Below pushit and wrapit scripts are just commands from guide.
 
 Pull the branch
-- git pull -b snc https://github.com/gtam/okd4_files.git
+- git clone -b snc https://github.com/gtam/okd4_files.git
 
 Rename and edit files as needed
 
@@ -11,6 +11,19 @@ Run the pushit script to install components
 - okd4_files/pushit
 
 Startup bootstrap, control-plane, and worker nodes
+- set them up according to guide
+OR
+- boot from CD and run the following
+UUID=`nmcli con sh|grep conn|awk '{print $4}'`
+nmcli con mod $UUID ipv4.address x.x.x.x/x
+nmcli con mod $UUID ipv4.gateway x.x.x.x
+nmcli con mod $UUID ipv4.dns x.x.x.x
+nmcli con mod $UUID ipv4.dns-search domain.local
+nmcli con mod $UUID ipv4.method manual
+nmcli con down $UUID
+nmcli con up $UUID
+
+sudo coreos-install install /dev/sda --copy-network --insecure-ignition --ignition-url http://10.1.24.200:8080/okd4/bootstrap.ign --image-url http://10.1.24.200:8080/okd4/fcos.raw.xz
 
 Run the wrapit script to finish the rest of steps
 - okd4_files/wrapit
