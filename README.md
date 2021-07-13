@@ -13,10 +13,7 @@ Run the pushit script to install components
 Startup bootstrap, control-plane, and worker nodes
 - set them up according to guide by interrupting the ISO startup and append
 ```
-ip=10.1.24.209::10.1.0.1:255.255.255.0:::none \
-nameserver=10.1.24.200 coreos.inst.install_dev=/dev/sda \
-coreos.inst.image_url=http://10.1.24.200:8080/okd4/fcos.raw.xz \
-coreos.inst.ignition_url=http://10.1.24.200:8080/okd4/bootstrap.ign
+ip=10.1.24.209::10.1.0.1:255.255.255.0:::none nameserver=10.1.24.200 coreos.inst.install_dev=/dev/sda coreos.inst.image_url=http://10.1.24.200:8080/okd4/fcos.raw.xz coreos.inst.ignition_url=http://10.1.24.200:8080/okd4/bootstrap.ign
 ```
 
 OR
