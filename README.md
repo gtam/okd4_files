@@ -15,7 +15,7 @@ Startup bootstrap, control-plane, and worker nodes
 
 OR
 
-- boot from CD and run the following
+- boot from CD and run the following for bootstrap; then master
 
 ```
 UUID=`nmcli con sh|grep conn|awk '{print $4}'`
@@ -32,6 +32,16 @@ sudo coreos-install install /dev/sda \
 --copy-network --insecure-ignition \
 --ignition-url http://10.1.24.200:8080/okd4/bootstrap.ign \
 --image-url http://10.1.24.200:8080/okd4/fcos.raw.xz
+```
+```
+init 6 #Reboot
+```
+- Check bootstrap progress
+```
+[okd4-services ~]# watch -n10 netstat -pnt
+```
+```
+[root@okd4-services ~]# openshift-install --dir=install_dir/ wait-for bootstrap-complete --log-level=debug
 ```
 
 Run the wrapit script to finish the rest of steps
