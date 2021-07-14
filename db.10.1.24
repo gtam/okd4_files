@@ -1,5 +1,5 @@
 $TTL    604800
-@       IN      SOA     okd4-services.okd.local. admin.okd.local. (
+@       IN      SOA     okd4-services.okd.gtam. admin.okd.gtam. (
                   6     ; Serial
              604800     ; Refresh
               86400     ; Retry
@@ -8,14 +8,14 @@ $TTL    604800
 )
 
 ; name servers - NS records
-@    IN      NS      okd4-services.okd.local.
+@    IN      NS      okd4-services.okd.gtam.
 
 ; name servers - PTR records
-200    IN    PTR    okd4-services.okd.local.
+200    IN    PTR    okd4-services.okd.gtam.
 
 ; OpenShift Container Platform Cluster - PTR records
-209    IN    PTR    okd4-bootstrap.lab.okd.local.
-201    IN    PTR    okd4-control-plane-1.lab.okd.local.
-202    IN    PTR    okd4-compute-1.lab.okd.local.
-200    IN    PTR    api.lab.okd.local.
-200    IN    PTR    api-int.lab.okd.local.
+209    IN    PTR    okd4-bootstrap.lab.okd.gtam.
+201    IN    PTR    okd4-control-plane-1.lab.okd.gtam.
+202    IN    PTR    okd4-compute-1.lab.okd.gtam.
+200    IN    PTR    api.lab.okd.gtam.
+200    IN    PTR    api-int.lab.okd.gtam.
