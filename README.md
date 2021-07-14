@@ -2,6 +2,7 @@
 
 See https://medium.com/swlh/guide-okd-4-5-single-node-cluster-832693cb752b for full guide.  Below pushit and wrapit scripts are just commands from guide.
 
+## Setup okd4-services node and follow below instructions
 Pull the branch
 - git clone -b snc https://github.com/gtam/okd4_files.git
 
