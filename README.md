@@ -51,5 +51,10 @@ init 6 #Reboot
 [root@okd4-services ~]# openshift-install --dir=install_dir/ wait-for bootstrap-complete --log-level=debug
 ```
 
-Run the wrapit script to finish the rest of steps
+Run the wrapit script to finish the rest of steps.  Follow instructions from script output.
 - okd4_files/wrapit
+
+# Troubleshooting Commands
+- oc get clusteroperators
+- oc get pods -A -owide -w
+
