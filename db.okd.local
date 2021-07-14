@@ -1,5 +1,5 @@
 $TTL    604800
-@       IN      SOA     okd4-services.okd.local. admin.okd.local. (
+@       IN      SOA     okd4-services.okd.gtam. admin.okd.gtam. (
                   1     ; Serial
              604800     ; Refresh
               86400     ; Retry
@@ -8,23 +8,23 @@ $TTL    604800
 )
 
 ; name servers - NS records
-@    IN      NS      okd4-services.okd.local.
+@    IN      NS      okd4-services.okd.gtam.
 
 ; name servers - A records
-okd4-services.okd.local.          IN      A       10.1.24.200
+okd4-services.okd.gtam.          IN      A       10.1.24.200
 
 ; OpenShift Container Platform Cluster - A records
-okd4-bootstrap.lab.okd.local.        IN      A      10.1.24.209
-okd4-control-plane-1.lab.okd.local.        IN      A      10.1.24.201
-okd4-compute-1.lab.okd.local.       IN    A     10.1.24.202
+okd4-bootstrap.lab.okd.gtam.        IN      A      10.1.24.209
+okd4-control-plane-1.lab.okd.gtam.        IN      A      10.1.24.201
+okd4-compute-1.lab.okd.gtam.       IN    A     10.1.24.202
 
 ; OpenShift internal cluster IPs - A records
-api.lab.okd.local.    IN    A    10.1.24.200
-api-int.lab.okd.local.    IN    A    10.1.24.200
-*.apps.lab.okd.local.    IN    A    10.1.24.200
-etcd-0.lab.okd.local.    IN    A     10.1.24.201
-console-openshift-console.apps.lab.okd.local.     IN     A     10.1.24.200
-oauth-openshift.apps.lab.okd.local.     IN     A     10.1.24.200
+api.lab.okd.gtam.    IN    A    10.1.24.200
+api-int.lab.okd.gtam.    IN    A    10.1.24.200
+*.apps.lab.okd.gtam.    IN    A    10.1.24.200
+etcd-0.lab.okd.gtam.    IN    A     10.1.24.201
+console-openshift-console.apps.lab.okd.gtam.     IN     A     10.1.24.200
+oauth-openshift.apps.lab.okd.gtam.     IN     A     10.1.24.200
 
 ; OpenShift internal cluster IPs - SRV records
-_etcd-server-ssl._tcp.lab.okd.local.    86400     IN    SRV     0    10    2380    etcd-0.lab.okd.local.
+_etcd-server-ssl._tcp.lab.okd.gtam.    86400     IN    SRV     0    10    2380    etcd-0.lab.okd.gtam.
