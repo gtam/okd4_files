@@ -17,5 +17,6 @@ $TTL    604800
 209    IN    PTR    okd4-bootstrap.lab.okd.gtam.
 201    IN    PTR    okd4-control-plane-1.lab.okd.gtam.
 202    IN    PTR    okd4-compute-1.lab.okd.gtam.
+203    IN    PTR    okd4-compute-2.lab.okd.gtam.
 200    IN    PTR    api.lab.okd.gtam.
 200    IN    PTR    api-int.lab.okd.gtam.
