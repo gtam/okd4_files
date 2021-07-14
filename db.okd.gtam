@@ -17,6 +17,7 @@ okd4-services.okd.gtam.          IN      A       10.1.24.200
 okd4-bootstrap.lab.okd.gtam.        IN      A      10.1.24.209
 okd4-control-plane-1.lab.okd.gtam.        IN      A      10.1.24.201
 okd4-compute-1.lab.okd.gtam.       IN    A     10.1.24.202
+okd4-compute-2.lab.okd.gtam.       IN    A     10.1.24.203
 
 ; OpenShift internal cluster IPs - A records
 api.lab.okd.gtam.    IN    A    10.1.24.200
